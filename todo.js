@@ -1,6 +1,6 @@
 const express = require("express");
 const fs = require("fs");
-
+const path= require("path");
 const app = express();
 app.use(express.json());
 
@@ -96,6 +96,12 @@ app.delete('/allTodos', (req, res) => {
   saveTodos([]);
   res.status(200).json({ message: "All todos cleared" });
 });
+
+app.get('/download' ,(req,res) =>{
+  const filePath = path.join(__dirname, "todos.json");
+  res.status(200).download(filePath);
+  
+})
 
 
 app.listen(3000, () => {
